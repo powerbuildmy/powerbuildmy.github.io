@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Power Build | Products</title>
+    <title>Power Build | The Proof</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" type="image/png" href="favicon.png">
@@ -43,24 +43,9 @@
             .mobile-menu { display: block; }
         }
         
-        .page-header { text-align: center; padding: 2rem 1rem 1rem; }
-        .page-header h1 { font-size: 2rem; font-weight: 700; color: #1E2A3A; }
-        .page-header p { color: #5A6E7A; margin-top: 0.5rem; }
-        .gold-line { width: 70px; height: 3px; background: #D4AF37; margin: 0.8rem auto 0; }
-        
-        .products-grid { max-width: 1200px; margin: 2rem auto; padding: 0 1.5rem; display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; }
-        .product-card {
-            background: white; border-radius: 1.5rem; overflow: hidden; width: 260px;
-            text-decoration: none; color: inherit; transition: all 0.25s;
-            border: 1px solid #E8E0D0; box-shadow: 0 5px 12px rgba(0,0,0,0.03);
-        }
-        .product-card:hover { transform: translateY(-6px); border-color: #D4AF37; box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
-        .product-img { width: 100%; height: auto; background: #F9F6EF; }
-        .product-img img { width: 100%; height: auto; display: block; }
-        .product-info { padding: 1rem 1rem 1.2rem; text-align: center; }
-        .product-info h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.3rem; }
-        .product-info p { font-size: 0.75rem; color: #5A6E7A; }
-        .arrow { margin-top: 0.5rem; font-size: 0.8rem; color: #D4AF37; }
+        .image-page { max-width: 1100px; margin: 2rem auto; padding: 0 1.5rem; }
+        .flyer-image { width: 100%; background: #FFFFFF; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1); border: 1px solid #E8E0D0; }
+        .flyer-image img { width: 100%; height: auto; display: block; }
         
         footer { background: #1E2A3A; color: #CFDDE5; padding: 2rem 2rem 1.5rem; margin-top: 2rem; }
         .footer-content { max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2rem; }
@@ -84,24 +69,17 @@
         }
         .wa-tooltip { position: absolute; right: 70px; background: #1F2A3A; color: #eee; font-size: 0.75rem; padding: 5px 12px; border-radius: 30px; white-space: nowrap; opacity: 0; transition: opacity 0.2s; pointer-events: none; }
         .float-wa:hover .wa-tooltip { opacity: 1; }
-        @media (max-width: 600px) { .products-grid { gap: 1rem; } .product-card { width: 45%; } .wa-tooltip { display: none; } }
+        @media (max-width: 600px) { .image-page { padding: 0 1rem; margin: 1rem auto; } .wa-tooltip { display: none; } }
     </style>
 </head>
 <body>
 
 <div id="header-placeholder"></div>
 
-<div class="page-header">
-    <h1>Our Products</h1>
-    <div class="gold-line"></div>
-    <p>Engineered with Metal Treatment Technology</p>
-</div>
-
-<div class="products-grid">
-    <a href="ef.html" class="product-card"><div class="product-img"><img src="ef.png" alt="Engine Treatment"></div><div class="product-info"><h3>Engine Treatment</h3><p>Eliminates 96% wear · Extends oil change</p><div class="arrow">View →</div></div></a>
-    <a href="pl.html" class="product-card"><div class="product-img"><img src="pl.png" alt="Penetrating Lubricant"></div><div class="product-info"><h3>Penetrating Lubricant</h3><p>20x more effective · Penetrates rust</p><div class="arrow">View →</div></div></a>
-    <a href="ep2.html" class="product-card"><div class="product-img"><img src="ep2.png" alt="EP2 Lithium Grease"></div><div class="product-info"><h3>EP2 Lithium Grease</h3><p>Multi-purpose · Wide temperature range</p><div class="arrow">View →</div></div></a>
-    <a href="fc.html" class="product-card"><div class="product-img"><img src="fc.png" alt="Fuel Conditioner"></div><div class="product-info"><h3>Fuel Conditioner</h3><p>Improves fuel quality · Maximizes mileage</p><div class="arrow">View →</div></div></a>
+<div class="image-page">
+    <div class="flyer-image">
+        <img src="proof.png" alt="Power Build - Johor Port POC Results">
+    </div>
 </div>
 
 <div id="footer-placeholder"></div>
