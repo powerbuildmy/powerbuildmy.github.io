@@ -52,7 +52,7 @@
         
         .cinema-car {
             position: absolute;
-            bottom: 30%;
+            bottom: 3%;  /* Changed from 30% to 3% — near the bottom */
             right: 0;
             animation: driveToTheWall 5s linear forwards;
         }
@@ -83,6 +83,9 @@
         @media (max-width: 700px) {
             .cinema-car img {
                 width: 320px;
+            }
+            .cinema-car {
+                bottom: 2%;
             }
         }
     </style>
@@ -146,10 +149,9 @@
     <span class="wa-tooltip">Chat with us</span>
 </a>
 
-<!-- Hidden audio element for the sound -->
+<!-- Hidden audio element -->
 <audio id="greaseSound" preload="auto" style="display: none;">
     <source src="grease-sound.mp3" type="audio/mpeg">
-    <source src="grease-sound.ogg" type="audio/ogg">
 </audio>
 
 <script>
@@ -170,11 +172,10 @@
         }
     });
 
-    // ===== EASTER EGG: Car drives across + sound =====
+    // ===== EASTER EGG: Car drives across at bottom + sound =====
     const ep2Element = document.getElementById('ep2Pail');
     let activeCinema = null;
     
-    // Get sound element
     const sound = document.getElementById('greaseSound');
     
     function createDust(x, y, count) {
@@ -190,11 +191,8 @@
     
     function playSound() {
         if (sound) {
-            sound.currentTime = 0; // Rewind to start
-            sound.play().catch(e => {
-                console.log('Audio play failed:', e);
-                // Most browsers require user interaction first — click on pail counts!
-            });
+            sound.currentTime = 0;
+            sound.play().catch(e => console.log('Audio play failed:', e));
         }
     }
     
@@ -244,13 +242,8 @@
     
     if (ep2Element) {
         ep2Element.addEventListener('click', (e) => {
-            // Play sound first
             playSound();
-            
-            // Dust at click point
             createDust(e.clientX, e.clientY, 6);
-            
-            // Start cinematic
             showCinematic();
         });
     }
