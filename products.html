@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Power Build | Products</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #F5F2EB;
+            color: #1E2A3A;
+            line-height: 1.5;
+        }
+
+        .navbar {
+            background: #FFFFFFdd;
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid #D4AF37;
+            padding: 0.8rem 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .logo h1 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #C5A028;
+            letter-spacing: -0.5px;
+        }
+        .logo p {
+            font-size: 0.7rem;
+            color: #5A6E7A;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #2C3E40;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: #D4AF37;
+            border-bottom: 2px solid #D4AF37;
+            padding-bottom: 4px;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #C5A028;
+        }
+
+        @media (max-width: 780px) {
+            .navbar {
+                padding: 0.8rem 1rem;
+            }
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem 0;
+                gap: 0.8rem;
+            }
+            .nav-links.show {
+                display: flex;
+            }
+            .mobile-menu {
+                display: block;
+            }
+        }
+
+        .page-header {
+            text-align: center;
+            padding: 2rem 1rem 1rem;
+        }
+        .page-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1E2A3A;
+        }
+        .page-header p {
+            color: #5A6E7A;
+            margin-top: 0.5rem;
+        }
+        .gold-line {
+            width: 70px;
+            height: 3px;
+            background: #D4AF37;
+            margin: 0.8rem auto 0;
+        }
+
+        .products-grid {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            width: 260px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.25s;
+            border: 1px solid #E8E0D0;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.03);
+        }
+        .product-card:hover {
+            transform: translateY(-6px);
+            border-color: #D4AF37;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        }
+        .product-img {
+            width: 100%;
+            height: auto;
+            background: #F9F6EF;
+        }
+        .product-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+        .product-info {
+            padding: 1rem 1rem 1.2rem;
+            text-align: center;
+        }
+        .product-info h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+        .product-info p {
+            font-size: 0.75rem;
+            color: #5A6E7A;
+        }
+        .arrow {
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            color: #D4AF37;
+        }
+
+        footer {
+            background: #1E2A3A;
+            color: #CFDDE5;
+            padding: 2rem 2rem 1.5rem;
+            margin-top: 2rem;
+        }
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        .footer-col h4 {
+            color: #D4AF37;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+        }
+        .footer-col p, .footer-col a {
+            font-size: 0.8rem;
+            color: #B0C0CE;
+            text-decoration: none;
+            line-height: 1.6;
+        }
+        .footer-col a:hover {
+            color: #D4AF37;
+        }
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            font-size: 0.7rem;
+            border-top: 1px solid #2F3E4E;
+            margin-top: 2rem;
+        }
+
+        .float-wa {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 1000;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            box-shadow: 0 8px 22px rgba(37, 211, 102, 0.4);
+            transition: all 0.2s ease;
+            text-decoration: none;
+            border: none;
+            animation: pulse-glow 2s infinite;
+        }
+
+        .float-wa:hover {
+            transform: scale(1.08);
+            background: #20b859;
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6);}
+            70% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0);}
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);}
+        }
+
+        .wa-tooltip {
+            position: absolute;
+            right: 70px;
+            background: #1F2A3A;
+            color: #eee;
+            font-size: 0.75rem;
+            padding: 5px 12px;
+            border-radius: 30px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+        }
+
+        .float-wa:hover .wa-tooltip {
+            opacity: 1;
+        }
+
+        @media (max-width: 600px) {
+            .products-grid {
+                gap: 1rem;
+            }
+            .product-card {
+                width: 45%;
+            }
+            .wa-tooltip {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">
+            <h1>POWER BUILD</h1>
+            <p>Tech Engineering Sdn Bhd</p>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="mission.html">Mission</a></li>
+            <li><a href="products.html" class="active">Products</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="page-header">
+    <h1>Our Products</h1>
+    <div class="gold-line"></div>
+    <p>Engineered with Metal Treatment Technology</p>
+</div>
+
+<div class="products-grid">
+    <a href="ef.html" class="product-card">
+        <div class="product-img">
+            <img src="ef.png" alt="Engine Treatment">
+        </div>
+        <div class="product-info">
+            <h3>Engine Treatment</h3>
+            <p>Eliminates 96% wear · Extends oil change</p>
+            <div class="arrow">View →</div>
+        </div>
+    </a>
+
+    <a href="pl.html" class="product-card">
+        <div class="product-img">
+            <img src="pl.png" alt="Penetrating Lubricant">
+        </div>
+        <div class="product-info">
+            <h3>Penetrating Lubricant</h3>
+            <p>20x more effective · Penetrates rust</p>
+            <div class="arrow">View →</div>
+        </div>
+    </a>
+
+    <a href="ep2.html" class="product-card">
+        <div class="product-img">
+            <img src="ep2.png" alt="EP2 Lithium Grease">
+        </div>
+        <div class="product-info">
+            <h3>EP2 Lithium Grease</h3>
+            <p>Multi-purpose · Wide temperature range</p>
+            <div class="arrow">View →</div>
+        </div>
+    </a>
+
+    <a href="fc.html" class="product-card">
+        <div class="product-img">
+            <img src="fc.png" alt="Fuel Conditioner">
+        </div>
+        <div class="product-info">
+            <h3>Fuel Conditioner</h3>
+            <p>Improves fuel quality · Maximizes mileage</p>
+            <div class="arrow">View →</div>
+        </div>
+    </a>
+</div>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-col">
+            <h4>POWER BUILD</h4>
+            <p>Tech Engineering Sdn Bhd<br>202401034909</p>
+            <p><i class="fas fa-map-marker-alt"></i> 17 Jalan Beladau 6, Taman Puteri Wangsa, Ulu Tiram 81800, Johor, Malaysia</p>
+        </div>
+        <div class="footer-col">
+            <h4>Contact</h4>
+            <p><i class="fas fa-phone"></i> <a href="tel:+60197204711">+60 197 204 711</a> / <a href="tel:+60143929913">+60 143 929 913</a></p>
+            <p><i class="fas fa-envelope"></i> <a href="mailto:powerbuildmy@gmail.com">powerbuildmy@gmail.com</a></p>
+            <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/+60143929913">WhatsApp: +60 143 929 913</a></p>
+        </div>
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <p><a href="about.html">About</a></p>
+            <p><a href="products.html">Products</a></p>
+            <p><a href="mission.html">Mission</a></p>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>© 2026 Power Build Tech Engineering Sdn Bhd (202401034909) — Built for Power. Designed for Endurance.</p>
+    </div>
+</footer>
+
+<a href="https://wa.me/+60143929913" class="float-wa" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-whatsapp"></i>
+    <span class="wa-tooltip">Chat with us</span>
+</a>
+
+<script>
+    const mobileBtn = document.getElementById('mobileMenu');
+    const navLinks = document.getElementById('navLinks');
+    mobileBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('show');
+    });
+</script>
+</body>
+</html>
