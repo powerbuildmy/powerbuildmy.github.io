@@ -13,16 +13,24 @@ body {
     line-height: 1.5;
 }
 
-/* ===== NAVBAR ===== */
+/* ===== NAVBAR - GUARANTEED STICKY ===== */
 .navbar {
-    background: #FFFFFFdd;
-    backdrop-filter: blur(12px);
     position: sticky;
     top: 0;
-    z-index: 100;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: #FFFFFFdd;
+    backdrop-filter: blur(12px);
     border-bottom: 2px solid #D4AF37;
     padding: 0.8rem 2rem;
     box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+/* Ensure the placeholder container doesn't break stickiness */
+#header-placeholder {
+    display: block;
+    width: 100%;
 }
 
 .nav-container {
