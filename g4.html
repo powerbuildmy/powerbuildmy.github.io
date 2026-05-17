@@ -48,7 +48,7 @@
             background: transparent;
         }
         
-        /* Lap animations */
+        /* Lap animations - all same speed (4 seconds per lap) */
         @keyframes lap1 {
             0% { transform: translateX(0); opacity: 0; }
             10% { opacity: 1; }
@@ -174,10 +174,9 @@
         }
     });
 
-    // ===== MULTI-LAP EASTER EGG (One car, no clones) =====
+    // ===== MULTI-LAP EASTER EGG with 6-second gaps =====
     const ep2Element = document.getElementById('ep2Pail');
     let activeCinema = null;
-    let currentLap = 0;
     let carElement = null;
     
     const sound = document.getElementById('greaseSound');
@@ -247,6 +246,7 @@
         
         // Schedule next lap or cleanup
         if (lapNumber < 3) {
+            // Wait 4 seconds for lap to complete + 6 seconds gap
             setTimeout(() => {
                 if (activeCinema) {
                     // Reposition car to right side (visually)
@@ -256,7 +256,7 @@
                         runLap(lapNumber + 1);
                     }, 100);
                 }
-            }, 4000);
+            }, 10000); // 4s lap + 6s gap = 10 seconds
         } else {
             // Last lap finished, cleanup after fade out
             setTimeout(() => {
@@ -285,7 +285,6 @@
         activeCinema = container;
         
         // Start first lap
-        currentLap = 1;
         runLap(1);
     }
     
