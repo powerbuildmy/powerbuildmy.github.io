@@ -20,24 +20,25 @@
             transform: scale(0.99);
         }
         
-        /* Rolling gear animation */
+        /* SVG Gear animation */
         @keyframes gearRoll {
-            0% { transform: translateX(-200px) rotate(0deg); opacity: 0; }
+            0% { transform: translateX(-250px) rotate(0deg); opacity: 0; }
             20% { opacity: 1; }
             80% { opacity: 1; }
-            100% { transform: translateX(200px) rotate(720deg); opacity: 0; }
+            100% { transform: translateX(250px) rotate(720deg); opacity: 0; }
         }
         
         .rolling-gear {
             position: fixed;
-            font-size: 60px;
-            filter: drop-shadow(0 0 10px rgba(212,175,55,0.6));
-            animation: gearRoll 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            width: 70px;
+            height: 70px;
+            filter: drop-shadow(0 0 8px rgba(0,0,0,0.3));
+            animation: gearRoll 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
             z-index: 10000;
             pointer-events: none;
         }
         
-        /* Fade text animation */
+        /* Fade text animation - 2x bigger */
         @keyframes textFadeInOut {
             0% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
             20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
@@ -50,44 +51,53 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: #FFD966;
+            color: #FFFFFF;
             font-family: 'Inter', sans-serif;
-            font-weight: 800;
-            font-size: 2.8rem;
+            font-weight: 900;
+            font-size: 5.6rem;
             text-align: center;
             white-space: nowrap;
             z-index: 10001;
             opacity: 0;
-            text-shadow: 0 0 15px rgba(212,175,55,0.4);
-            letter-spacing: 3px;
+            text-shadow: 
+                0 0 20px rgba(212,175,55,0.8),
+                0 0 40px rgba(212,175,55,0.4),
+                2px 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 6px;
             pointer-events: none;
-            animation: textFadeInOut 3s ease-in-out forwards;
+            animation: textFadeInOut 3.5s ease-in-out forwards;
         }
         
         /* Gear shard animation */
         @keyframes gearShard {
             0% { transform: scale(0) rotate(0deg); opacity: 0; }
-            50% { transform: scale(1) rotate(180deg); opacity: 0.8; }
+            50% { transform: scale(1) rotate(180deg); opacity: 0.9; }
             100% { transform: scale(0) rotate(360deg); opacity: 0; }
         }
         
         .gear-shard {
             position: absolute;
-            font-size: 20px;
+            width: 24px;
+            height: 24px;
             animation: gearShard 0.8s ease-out forwards;
             pointer-events: none;
         }
         
         @media (max-width: 700px) {
             .rolling-text {
-                font-size: 1.4rem;
+                font-size: 2.4rem;
                 white-space: normal;
                 width: 90%;
                 text-align: center;
-                letter-spacing: 1px;
+                letter-spacing: 2px;
             }
             .rolling-gear {
-                font-size: 40px;
+                width: 45px;
+                height: 45px;
+            }
+            .gear-shard {
+                width: 18px;
+                height: 18px;
             }
         }
     </style>
@@ -169,18 +179,51 @@
         }
     });
 
-    // ===== EASTER EGG: Rotating gear that rolls out text =====
+    // ===== EASTER EGG: Metallic SVG gears + large text =====
     const ep2Element = document.getElementById('ep2Pail');
     let activeText = null;
     
+    // Create SVG gear HTML
+    function getSvgGear() {
+        return `<svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="gearGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:1" />
+                    <stop offset="50%" style="stop-color:#B8960F;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#8B6914;stop-opacity:1" />
+                </linearGradient>
+                <linearGradient id="gearInner" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:#C5A028;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#F5D668;stop-opacity:1" />
+                </linearGradient>
+            </defs>
+            <!-- Gear teeth -->
+            <path d="M50,15 L55,18 L58,14 L65,20 L61,25 L66,28 L70,35 L64,38 L66,45 L58,43 L55,50 L50,47 L45,50 L42,43 L34,45 L36,38 L30,35 L34,28 L39,25 L35,20 L42,14 L45,18 Z" 
+                  fill="url(#gearGrad)" stroke="#6B4E0A" stroke-width="1.5"/>
+            <!-- Inner ring -->
+            <circle cx="50" cy="50" r="25" fill="url(#gearInner)" stroke="#6B4E0A" stroke-width="1.5"/>
+            <!-- Center hole -->
+            <circle cx="50" cy="50" r="10" fill="#1E2A3A" stroke="#6B4E0A" stroke-width="1"/>
+            <!-- Spokes -->
+            <line x1="50" y1="25" x2="50" y2="38" stroke="#8B6914" stroke-width="3"/>
+            <line x1="50" y1="62" x2="50" y2="75" stroke="#8B6914" stroke-width="3"/>
+            <line x1="25" y1="50" x2="38" y2="50" stroke="#8B6914" stroke-width="3"/>
+            <line x1="62" y1="50" x2="75" y2="50" stroke="#8B6914" stroke-width="3"/>
+            <line x1="32" y1="32" x2="42" y2="42" stroke="#8B6914" stroke-width="3"/>
+            <line x1="68" y1="68" x2="58" y2="58" stroke="#8B6914" stroke-width="3"/>
+            <line x1="68" y1="32" x2="58" y2="42" stroke="#8B6914" stroke-width="3"/>
+            <line x1="32" y1="68" x2="42" y2="58" stroke="#8B6914" stroke-width="3"/>
+        </svg>`;
+    }
+    
     function createRollingGear(x, y) {
-        const gear = document.createElement('div');
-        gear.className = 'rolling-gear';
-        gear.innerHTML = '⚙️';
-        gear.style.left = x + 'px';
-        gear.style.top = y + 'px';
-        document.body.appendChild(gear);
-        setTimeout(() => gear.remove(), 1500);
+        const gearDiv = document.createElement('div');
+        gearDiv.className = 'rolling-gear';
+        gearDiv.style.left = x + 'px';
+        gearDiv.style.top = y + 'px';
+        gearDiv.innerHTML = getSvgGear();
+        document.body.appendChild(gearDiv);
+        setTimeout(() => gearDiv.remove(), 1800);
     }
     
     function createGearShards(x, y) {
@@ -191,15 +234,19 @@
         shardContainer.style.pointerEvents = 'none';
         document.body.appendChild(shardContainer);
         
-        for (let i = 0; i < 8; i++) {
+        const icons = ['⚙️', '🔧', '⚙️', '✨', '⚙️', '🔩'];
+        
+        for (let i = 0; i < 10; i++) {
             const shard = document.createElement('div');
             shard.className = 'gear-shard';
             const angle = (Math.random() * Math.PI * 2);
-            const distance = 40 + Math.random() * 70;
+            const distance = 50 + Math.random() * 80;
             shard.style.left = (Math.cos(angle) * distance) + 'px';
             shard.style.top = (Math.sin(angle) * distance) + 'px';
-            const icons = ['⚙️', '🔧', '⚙️', '🛢️', '⚙️', '✨'];
             shard.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+            shard.style.fontSize = (18 + Math.random() * 12) + 'px';
+            shard.style.textAlign = 'center';
+            shard.style.lineHeight = '1';
             shardContainer.appendChild(shard);
             setTimeout(() => shard.remove(), 800);
         }
@@ -214,17 +261,16 @@
         
         const textDiv = document.createElement('div');
         textDiv.className = 'rolling-text';
-        textDiv.innerHTML = '⚙️ GREASE IS THE WORD ⚙️';
+        textDiv.innerHTML = 'GREASE IS THE WORD';
         document.body.appendChild(textDiv);
         activeText = textDiv;
         
-        // Animation lasts 3 seconds, remove after animation completes
         setTimeout(() => {
             if (activeText === textDiv) {
                 textDiv.remove();
                 activeText = null;
             }
-        }, 3000);
+        }, 3500);
     }
     
     if (ep2Element) {
@@ -232,15 +278,13 @@
             const x = e.clientX;
             const y = e.clientY;
             
-            // Create 2-3 rolling gears from different positions
-            createRollingGear(x - 40, y);
-            createRollingGear(x + 30, y - 15);
-            createRollingGear(x - 10, y + 20);
+            createRollingGear(x - 50, y);
+            createRollingGear(x + 40, y - 20);
+            createRollingGear(x - 20, y + 30);
+            createRollingGear(x + 10, y - 10);
             
-            // Create gear shards/particles
             createGearShards(x, y);
             
-            // Show the rolling text with fade
             showRollingText();
         });
     }
