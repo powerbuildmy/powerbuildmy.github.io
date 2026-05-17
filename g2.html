@@ -32,7 +32,7 @@
             overflow-x: hidden;
         }
         
-        /* NEW: Car drives FULL LEFT until it hits the wall */
+        /* Car drives from right to left, fades in/out */
         @keyframes driveToTheWall {
             0% {
                 transform: translateX(0) translateY(0);
@@ -54,40 +54,18 @@
             position: absolute;
             bottom: 30%;
             right: 0;
-            animation: driveToTheWall 4s linear forwards;
+            animation: driveToTheWall 5s linear forwards;
         }
         
         .cinema-car img {
-            width: 240px;
+            width: 600px;
+            max-width: 80vw;
             height: auto;
             display: block;
-        }
-        
-        /* Letter trail container - follows the car */
-        .letter-trail {
-            position: absolute;
-            bottom: calc(30% + 50px);
-            right: 0;
-            white-space: nowrap;
-            font-family: 'Inter', sans-serif;
-            font-weight: 800;
-            font-size: 2rem;
-            color: #FFD966;
-            text-shadow: 0 0 15px rgba(212,175,55,0.8), 2px 2px 4px rgba(0,0,0,0.5);
-            letter-spacing: 4px;
-            pointer-events: none;
-            animation: driveToTheWall 4s linear forwards;
-        }
-        
-        .letter-trail span {
-            display: inline-block;
-            opacity: 0;
-            animation: letterAppear 0.1s forwards;
-        }
-        
-        @keyframes letterAppear {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            background: #1E2A3A;
+            border-radius: 16px;
+            padding: 12px;
+            box-shadow: 0 0 20px rgba(212,175,55,0.3);
         }
         
         /* Dust particles */
@@ -107,12 +85,8 @@
         
         @media (max-width: 700px) {
             .cinema-car img {
-                width: 140px;
-            }
-            .letter-trail {
-                font-size: 1rem;
-                bottom: calc(30% + 30px);
-                letter-spacing: 1px;
+                width: 320px;
+                padding: 6px;
             }
         }
     </style>
@@ -194,7 +168,7 @@
         }
     });
 
-    // ===== CINEMATIC EASTER EGG: Car + letter trail =====
+    // ===== EASTER EGG: Car drives across =====
     const ep2Element = document.getElementById('ep2Pail');
     let activeCinema = null;
     
@@ -210,7 +184,6 @@
     }
     
     function showCinematic() {
-        // Remove existing if any
         if (activeCinema) {
             activeCinema.remove();
         }
@@ -218,77 +191,44 @@
         const container = document.createElement('div');
         container.className = 'cinema-container';
         
-        // Car element with image
         const carDiv = document.createElement('div');
         carDiv.className = 'cinema-car';
         const carImg = document.createElement('img');
         carImg.src = 'car.png';
-        carImg.alt = 'Vintage Car';
+        carImg.alt = 'Grease Car';
         carImg.onerror = function() {
-            // Fallback if car.png doesn't exist
             this.style.display = 'none';
             const fallback = document.createElement('div');
-            fallback.style.width = '200px';
-            fallback.style.height = '100px';
+            fallback.style.width = '500px';
+            fallback.style.height = '180px';
             fallback.style.background = '#C5A028';
-            fallback.style.borderRadius = '10px';
+            fallback.style.borderRadius = '16px';
             fallback.style.display = 'flex';
             fallback.style.alignItems = 'center';
             fallback.style.justifyContent = 'center';
             fallback.style.color = '#fff';
             fallback.style.fontWeight = 'bold';
+            fallback.style.fontSize = '1.5rem';
             fallback.innerHTML = '🚗 GREASE CAR 🚗';
             carDiv.appendChild(fallback);
         };
         carDiv.appendChild(carImg);
         container.appendChild(carDiv);
         
-        // Letter trail container
-        const trailDiv = document.createElement('div');
-        trailDiv.className = 'letter-trail';
-        const phrase = 'GREASE IS THE WORD';
-        trailDiv.innerHTML = phrase.split('').map(char => 
-            char === ' ' ? '<span style="width: 1rem;">&nbsp;</span>' : `<span>${char}</span>`
-        ).join('');
-        container.appendChild(trailDiv);
-        
         document.body.appendChild(container);
         activeCinema = container;
         
-        // Animate letters one by one
-        const letters = trailDiv.querySelectorAll('span');
-        const totalLetters = letters.length;
-        const duration = 4000;
-        const intervalTime = duration / totalLetters;
-        
-        letters.forEach((letter, index) => {
-            setTimeout(() => {
-                if (letter.innerText !== ' ') {
-                    letter.style.animation = 'letterAppear 0.1s forwards';
-                }
-                // Add dust puffs occasionally
-                if (index % 4 === 0) {
-                    const dustX = window.innerWidth - (index / totalLetters) * window.innerWidth - 80;
-                    const dustY = window.innerHeight * 0.7;
-                    createDust(dustX, dustY, 2);
-                }
-            }, index * intervalTime);
-        });
-        
-        // Clean up after animation (a bit longer to ensure it exits the screen)
         setTimeout(() => {
             if (activeCinema === container) {
                 container.remove();
                 activeCinema = null;
             }
-        }, 5000);
+        }, 5500);
     }
     
     if (ep2Element) {
         ep2Element.addEventListener('click', (e) => {
-            // Dust at click point
             createDust(e.clientX, e.clientY, 6);
-            // Start cinematic
             showCinematic();
         });
     }
