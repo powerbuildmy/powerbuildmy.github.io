@@ -48,7 +48,7 @@
             background: transparent;
         }
         
-        /* Lap animations - all same speed (4 seconds per lap) */
+        /* Lap 1: 4 seconds */
         @keyframes lap1 {
             0% { transform: translateX(0); opacity: 0; }
             10% { opacity: 1; }
@@ -56,17 +56,19 @@
             100% { transform: translateX(-100vw); opacity: 1; }
         }
         
+        /* Lap 2: 6 seconds (slower) */
         @keyframes lap2 {
             0% { transform: translateX(100vw); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
+            8% { opacity: 1; }
+            92% { opacity: 1; }
             100% { transform: translateX(-100vw); opacity: 1; }
         }
         
+        /* Lap 3: 8 seconds (even slower) */
         @keyframes lap3 {
             0% { transform: translateX(100vw); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
+            6% { opacity: 1; }
+            94% { opacity: 1; }
             100% { transform: translateX(-100vw); opacity: 0; }
         }
         
@@ -174,7 +176,7 @@
         }
     });
 
-    // ===== MULTI-LAP EASTER EGG with 6-second gaps =====
+    // ===== MULTI-LAP EASTER EGG with 7-second gaps and slower laps =====
     const ep2Element = document.getElementById('ep2Pail');
     let activeCinema = null;
     let carElement = null;
@@ -235,28 +237,30 @@
         // Force reflow to restart animation
         void carElement.offsetHeight;
         
-        // Apply appropriate animation based on lap number
+        // Reset opacity and position
+        carElement.style.opacity = '0';
+        carElement.style.transform = 'translateX(100vw)';
+        
+        // Apply animation with different durations
         if (lapNumber === 1) {
             carElement.style.animation = 'lap1 4s linear forwards';
         } else if (lapNumber === 2) {
-            carElement.style.animation = 'lap2 4s linear forwards';
+            carElement.style.animation = 'lap2 6s linear forwards';
         } else if (lapNumber === 3) {
-            carElement.style.animation = 'lap3 4s linear forwards';
+            carElement.style.animation = 'lap3 8s linear forwards';
         }
         
         // Schedule next lap or cleanup
         if (lapNumber < 3) {
-            // Wait 4 seconds for lap to complete + 6 seconds gap
+            // Calculate delay: lap duration + 7 second gap
+            let lapDuration = (lapNumber === 1) ? 4000 : (lapNumber === 2) ? 6000 : 8000;
+            let delay = lapDuration + 7000; // 7 seconds gap
+            
             setTimeout(() => {
                 if (activeCinema) {
-                    // Reposition car to right side (visually)
-                    carElement.style.transform = 'translateX(100vw)';
-                    carElement.style.opacity = '0';
-                    setTimeout(() => {
-                        runLap(lapNumber + 1);
-                    }, 100);
+                    runLap(lapNumber + 1);
                 }
-            }, 10000); // 4s lap + 6s gap = 10 seconds
+            }, delay);
         } else {
             // Last lap finished, cleanup after fade out
             setTimeout(() => {
@@ -265,7 +269,7 @@
                     activeCinema = null;
                     carElement = null;
                 }
-            }, 4200);
+            }, 8200); // 8s lap + buffer
         }
     }
     
