@@ -13,7 +13,7 @@ body {
     line-height: 1.5;
 }
 
-/* ===== NAVBAR - GUARANTEED STICKY ===== */
+/* ===== NAVBAR ===== */
 .navbar {
     position: sticky;
     top: 0;
@@ -25,12 +25,6 @@ body {
     border-bottom: 2px solid #D4AF37;
     padding: 0.8rem 2rem;
     box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-}
-
-/* Ensure the placeholder container doesn't break stickiness */
-#header-placeholder {
-    display: block;
-    width: 100%;
 }
 
 .nav-container {
