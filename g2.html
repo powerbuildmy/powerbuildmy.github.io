@@ -32,7 +32,7 @@
             overflow: hidden;
         }
         
-        /* Car animation - drives from right to left */
+        /* Car animation - drives from right to left with fade in/out */
         @keyframes driveAcross {
             0% {
                 transform: translateX(100vw) translateY(0);
@@ -41,7 +41,7 @@
             10% {
                 opacity: 1;
             }
-            90% {
+            85% {
                 opacity: 1;
             }
             100% {
@@ -57,10 +57,16 @@
             animation: driveAcross 4s ease-in-out forwards;
         }
         
+        .cinema-car img {
+            width: 240px;
+            height: auto;
+            display: block;
+        }
+        
         /* Letter trail container */
         .letter-trail {
             position: absolute;
-            bottom: calc(30% + 40px);
+            bottom: calc(30% + 50px);
             right: 0;
             white-space: nowrap;
             font-family: 'Inter', sans-serif;
@@ -83,7 +89,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* Small dust particles */
+        /* Dust particles */
         @keyframes dustPuff {
             0% { transform: scale(0); opacity: 0.8; }
             100% { transform: scale(1.5); opacity: 0; }
@@ -99,13 +105,12 @@
         }
         
         @media (max-width: 700px) {
-            .cinema-car svg {
-                width: 120px;
-                height: auto;
+            .cinema-car img {
+                width: 140px;
             }
             .letter-trail {
-                font-size: 0.9rem;
-                bottom: calc(30% + 25px);
+                font-size: 1rem;
+                bottom: calc(30% + 30px);
                 letter-spacing: 1px;
             }
         }
@@ -192,38 +197,11 @@
     const ep2Element = document.getElementById('ep2Pail');
     let activeCinema = null;
     
-    // SVG vintage car (generic convertible)
-    function getCarSVG() {
-        return `<svg width="200" height="120" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
-            <!-- Car body -->
-            <path d="M30,70 L40,45 L70,35 L130,35 L160,45 L170,70 Z" fill="#C5A028" stroke="#8B6914" stroke-width="2"/>
-            <!-- Windshield -->
-            <path d="M45,45 L60,35 L85,35 L75,45 Z" fill="#87CEEB" stroke="#8B6914" stroke-width="1.5" opacity="0.8"/>
-            <!-- Window -->
-            <path d="M90,35 L115,35 L125,45 L85,45 Z" fill="#87CEEB" stroke="#8B6914" stroke-width="1.5" opacity="0.8"/>
-            <!-- Hood detail -->
-            <line x1="130" y1="38" x2="155" y2="50" stroke="#8B6914" stroke-width="1.5"/>
-            <!-- Headlight -->
-            <circle cx="165" cy="62" r="6" fill="#FFD700" stroke="#8B6914" stroke-width="1"/>
-            <!-- Taillight -->
-            <circle cx="35" cy="65" r="4" fill="#FF4444" stroke="#8B6914" stroke-width="1"/>
-            <!-- Front wheel -->
-            <circle cx="140" cy="80" r="18" fill="#2a2a2a" stroke="#8B6914" stroke-width="2"/>
-            <circle cx="140" cy="80" r="8" fill="#C5A028"/>
-            <!-- Rear wheel -->
-            <circle cx="55" cy="80" r="18" fill="#2a2a2a" stroke="#8B6914" stroke-width="2"/>
-            <circle cx="55" cy="80" r="8" fill="#C5A028"/>
-            <!-- Bumper -->
-            <rect x="25" y="72" width="10" height="4" rx="2" fill="#silver" stroke="#8B6914" stroke-width="1"/>
-            <rect x="165" y="72" width="10" height="4" rx="2" fill="#silver" stroke="#8B6914" stroke-width="1"/>
-        </svg>`;
-    }
-    
     function createDust(x, y, count) {
         for (let i = 0; i < count; i++) {
             const dust = document.createElement('div');
             dust.className = 'dust';
-            dust.style.left = (x + (Math.random() - 0.5) * 30) + 'px';
+            dust.style.left = (x + (Math.random() - 0.5) * 40) + 'px';
             dust.style.top = (y + (Math.random() - 0.5) * 20) + 'px';
             document.body.appendChild(dust);
             setTimeout(() => dust.remove(), 600);
@@ -239,10 +217,29 @@
         const container = document.createElement('div');
         container.className = 'cinema-container';
         
-        // Car element
+        // Car element with image
         const carDiv = document.createElement('div');
         carDiv.className = 'cinema-car';
-        carDiv.innerHTML = getCarSVG();
+        const carImg = document.createElement('img');
+        carImg.src = 'car.png';
+        carImg.alt = 'Vintage Car';
+        carImg.onerror = function() {
+            // Fallback if car.png doesn't exist
+            this.style.display = 'none';
+            const fallback = document.createElement('div');
+            fallback.style.width = '200px';
+            fallback.style.height = '100px';
+            fallback.style.background = '#C5A028';
+            fallback.style.borderRadius = '10px';
+            fallback.style.display = 'flex';
+            fallback.style.alignItems = 'center';
+            fallback.style.justifyContent = 'center';
+            fallback.style.color = '#fff';
+            fallback.style.fontWeight = 'bold';
+            fallback.innerHTML = '🚗 GREASE CAR 🚗';
+            carDiv.appendChild(fallback);
+        };
+        carDiv.appendChild(carImg);
         container.appendChild(carDiv);
         
         // Letter trail container
@@ -257,10 +254,10 @@
         document.body.appendChild(container);
         activeCinema = container;
         
-        // Animate letters one by one as car moves
+        // Animate letters one by one
         const letters = trailDiv.querySelectorAll('span');
         const totalLetters = letters.length;
-        const duration = 4000; // 4 seconds (matches drive animation)
+        const duration = 4000;
         const intervalTime = duration / totalLetters;
         
         letters.forEach((letter, index) => {
@@ -268,11 +265,11 @@
                 if (letter.innerText !== ' ') {
                     letter.style.animation = 'letterAppear 0.1s forwards';
                 }
-                // Add dust puffs near wheels as letters appear
-                if (index % 3 === 0) {
-                    const dustX = window.innerWidth - (index / totalLetters) * window.innerWidth - 100;
+                // Add dust puffs occasionally
+                if (index % 4 === 0) {
+                    const dustX = window.innerWidth - (index / totalLetters) * window.innerWidth - 80;
                     const dustY = window.innerHeight * 0.7;
-                    createDust(dustX, dustY, 3);
+                    createDust(dustX, dustY, 2);
                 }
             }, index * intervalTime);
         });
@@ -288,9 +285,9 @@
     
     if (ep2Element) {
         ep2Element.addEventListener('click', (e) => {
-            // Create dust puffs at click point
-            createDust(e.clientX, e.clientY, 8);
-            // Start the cinematic
+            // Dust at click point
+            createDust(e.clientX, e.clientY, 6);
+            // Start cinematic
             showCinematic();
         });
     }
