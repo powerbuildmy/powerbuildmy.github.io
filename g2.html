@@ -62,10 +62,7 @@
             max-width: 80vw;
             height: auto;
             display: block;
-            background: #1E2A3A;
-            border-radius: 16px;
-            padding: 12px;
-            box-shadow: 0 0 20px rgba(212,175,55,0.3);
+            background: transparent;
         }
         
         /* Dust particles */
@@ -86,7 +83,6 @@
         @media (max-width: 700px) {
             .cinema-car img {
                 width: 320px;
-                padding: 6px;
             }
         }
     </style>
@@ -150,6 +146,12 @@
     <span class="wa-tooltip">Chat with us</span>
 </a>
 
+<!-- Hidden audio element for the sound -->
+<audio id="greaseSound" preload="auto" style="display: none;">
+    <source src="grease-sound.mp3" type="audio/mpeg">
+    <source src="grease-sound.ogg" type="audio/ogg">
+</audio>
+
 <script>
     // Mobile menu toggle
     const mobileBtn = document.getElementById('mobileMenu');
@@ -168,9 +170,12 @@
         }
     });
 
-    // ===== EASTER EGG: Car drives across =====
+    // ===== EASTER EGG: Car drives across + sound =====
     const ep2Element = document.getElementById('ep2Pail');
     let activeCinema = null;
+    
+    // Get sound element
+    const sound = document.getElementById('greaseSound');
     
     function createDust(x, y, count) {
         for (let i = 0; i < count; i++) {
@@ -180,6 +185,16 @@
             dust.style.top = (y + (Math.random() - 0.5) * 20) + 'px';
             document.body.appendChild(dust);
             setTimeout(() => dust.remove(), 600);
+        }
+    }
+    
+    function playSound() {
+        if (sound) {
+            sound.currentTime = 0; // Rewind to start
+            sound.play().catch(e => {
+                console.log('Audio play failed:', e);
+                // Most browsers require user interaction first — click on pail counts!
+            });
         }
     }
     
@@ -196,6 +211,7 @@
         const carImg = document.createElement('img');
         carImg.src = 'car.png';
         carImg.alt = 'Grease Car';
+        carImg.style.background = 'transparent';
         carImg.onerror = function() {
             this.style.display = 'none';
             const fallback = document.createElement('div');
@@ -228,7 +244,13 @@
     
     if (ep2Element) {
         ep2Element.addEventListener('click', (e) => {
+            // Play sound first
+            playSound();
+            
+            // Dust at click point
             createDust(e.clientX, e.clientY, 6);
+            
+            // Start cinematic
             showCinematic();
         });
     }
