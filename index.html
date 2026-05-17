@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Power Build Tech Engineering | Official Flyers</title>
-    <!-- Font Awesome 6 for WhatsApp & Icons -->
+    <title>Power Build Tech Engineering | Lubricant Solutions</title>
+    <!-- Google Fonts for modern, industrial feel -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -14,15 +16,92 @@
         }
 
         body {
-            background: #0A0F1A;  /* deep industrial dark base matching flyer theme */
-            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
-            padding: 2rem 1.5rem;
+            background: #0A0F1A;
+            font-family: 'Inter', 'Plus Jakarta Sans', sans-serif;
+            color: #EAECF0;
         }
 
-        /* main container for side by side flyer images */
-        .flyers-container {
+        /* ========= TOP HEADER / NAVBAR ========= */
+        .top-header {
+            background: linear-gradient(135deg, #070C15 0%, #0E1622 100%);
+            border-bottom: 2px solid #FFD966;
+            padding: 0.8rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .header-container {
             max-width: 1400px;
             margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .logo-area h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(120deg, #FFFFFF, #FFD966);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+        .logo-area p {
+            font-size: 0.7rem;
+            color: #FFD966;
+            letter-spacing: 1px;
+        }
+
+        .header-contact {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.85rem;
+            background: rgba(0,0,0,0.4);
+            padding: 0.5rem 1rem;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+        }
+        .header-contact a {
+            color: #FFDE9C;
+            text-decoration: none;
+            transition: 0.2s;
+            font-weight: 500;
+        }
+        .header-contact a:hover {
+            color: #FFB347;
+            text-decoration: underline;
+        }
+        .header-contact i {
+            margin-right: 6px;
+            color: #FFD966;
+        }
+
+        @media (max-width: 780px) {
+            .top-header {
+                padding: 0.8rem 1rem;
+            }
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .header-contact {
+                justify-content: center;
+            }
+        }
+
+        /* ========= FLYERS SECTION ========= */
+        .flyers-section {
+            max-width: 1400px;
+            margin: 2.5rem auto;
+            padding: 0 1.5rem;
+        }
+        .flyers-container {
             display: flex;
             flex-wrap: wrap;
             gap: 2rem;
@@ -30,7 +109,6 @@
             align-items: flex-start;
         }
 
-        /* each image card */
         .flyer-card {
             flex: 1;
             min-width: 320px;
@@ -54,39 +132,17 @@
             display: block;
             background: #03060b;
         }
-
         .flyer-image img {
             width: 100%;
             height: auto;
             display: block;
             object-fit: contain;
-            transition: opacity 0.2s;
         }
 
-        .caption {
-            padding: 1rem 1.2rem 1.2rem;
-            text-align: center;
-            border-top: 1px solid rgba(255,217,102,0.2);
-            background: rgba(0,0,0,0.35);
-        }
-
-        .caption h4 {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #FFD966;
-            letter-spacing: 1px;
-            margin-bottom: 4px;
-        }
-
-        .caption p {
-            font-size: 0.7rem;
-            color: #B9C7DD;
-        }
-
-        /* company info banner */
+        /* company info strip (minimalist — only new SSM number) */
         .info-strip {
             max-width: 1200px;
-            margin: 2.5rem auto 1rem;
+            margin: 1rem auto 1.5rem;
             background: #0E1420cc;
             backdrop-filter: blur(8px);
             border-radius: 2rem;
@@ -125,12 +181,18 @@
             text-decoration: none;
             font-weight: 500;
         }
-
         .company-details a:hover {
             text-decoration: underline;
         }
 
-        /* floating whatsapp button */
+        .badge-note {
+            font-size: 0.7rem;
+            text-align: center;
+            margin-top: 0.8rem;
+            opacity: 0.7;
+        }
+
+        /* floating whatsapp */
         .float-wa {
             position: fixed;
             bottom: 28px;
@@ -155,7 +217,6 @@
         .float-wa:hover {
             transform: scale(1.08);
             background: #20b859;
-            box-shadow: 0 10px 28px rgba(0,0,0,0.4);
         }
 
         @keyframes pulse-glow {
@@ -177,7 +238,6 @@
             opacity: 0;
             transition: opacity 0.2s;
             pointer-events: none;
-            font-family: monospace;
         }
 
         .float-wa:hover .wa-tooltip {
@@ -191,13 +251,17 @@
             color: #6C7A91;
             border-top: 1px solid rgba(255,217,102,0.15);
             padding-top: 2rem;
+            padding-bottom: 2rem;
             max-width: 1200px;
             margin-left: auto;
             margin-right: auto;
         }
 
         @media (max-width: 750px) {
-            body {
+            .flyers-section {
+                padding: 0 1rem;
+            }
+            .info-strip {
                 padding: 1rem;
             }
             .company-details {
@@ -205,54 +269,54 @@
                 align-items: center;
                 gap: 0.6rem;
             }
-            .info-strip {
-                padding: 1rem;
-            }
-        }
-
-        .badge-note {
-            font-size: 0.7rem;
-            text-align: center;
-            margin-top: 0.8rem;
-            opacity: 0.7;
         }
     </style>
 </head>
 <body>
 
-<div class="flyers-container">
-    <!-- Flyer 1: coverpage.png (Front cover) -->
-    <div class="flyer-card">
-        <div class="flyer-image">
-            <img src="coverpage.png" alt="Power Build Front Cover - Technology That Enrich The World" onerror="this.onerror=null; this.src='https://placehold.co/800x1000/1A1F2E/FFD966?text=coverpage.png+Not+Found'; this.style.objectFit='cover';">
+<!-- TOP HEADER (matching industrial theme) -->
+<div class="top-header">
+    <div class="header-container">
+        <div class="logo-area">
+            <h1>POWER BUILD</h1>
+            <p>Tech Engineering Sdn Bhd</p>
         </div>
-        <div class="caption">
-            <h4><i class="fas fa-image"></i> FRONT COVER</h4>
-            <p>Technology That Enrich The World • Fuel Efficiency • Innovation</p>
-        </div>
-    </div>
-
-    <!-- Flyer 2: backcover.png (Back cover - renamed from 8-Back cover.png) -->
-    <div class="flyer-card">
-        <div class="flyer-image">
-            <img src="backcover.png" alt="Power Build Back Cover - Built For Power. Designed For Endurance." onerror="this.onerror=null; this.src='https://placehold.co/800x1000/1A1F2E/FFD966?text=backcover.png+Not+Found'; this.style.objectFit='cover';">
-        </div>
-        <div class="caption">
-            <h4><i class="fas fa-image"></i> BACK COVER</h4>
-            <p>Built For Power. Designed For Endurance. • Superior Protection • Global Solutions</p>
+        <div class="header-contact">
+            <span><i class="fas fa-phone-alt"></i> <a href="tel:+60197204711">+60 197 204 711</a></span>
+            <span><i class="fas fa-phone-alt"></i> <a href="tel:+60143929913">+60 143 929 913</a></span>
+            <span><i class="fas fa-envelope"></i> <a href="mailto:powerbuildmy@gmail.com">powerbuildmy@gmail.com</a></span>
+            <span><i class="fab fa-whatsapp"></i> <a href="https://wa.me/+60143929913" target="_blank">WhatsApp</a></span>
         </div>
     </div>
 </div>
 
-<!-- Company Information Strip (matches the required data) -->
+<!-- FLYERS SECTION (side by side) -->
+<div class="flyers-section">
+    <div class="flyers-container">
+        <!-- Flyer 1: coverpage.png -->
+        <div class="flyer-card">
+            <div class="flyer-image">
+                <img src="coverpage.png" alt="Power Build Front Cover - Technology That Enrich The World" onerror="this.onerror=null; this.src='https://placehold.co/800x1000/1A1F2E/FFD966?text=coverpage.png+Not+Found';">
+            </div>
+        </div>
+        <!-- Flyer 2: backcover.png -->
+        <div class="flyer-card">
+            <div class="flyer-image">
+                <img src="backcover.png" alt="Power Build Back Cover - Built For Power. Designed For Endurance." onerror="this.onerror=null; this.src='https://placehold.co/800x1000/1A1F2E/FFD966?text=backcover.png+Not+Found';">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- COMPANY INFO STRIP (minimalist: only new SSM system number: 202401034909) -->
 <div class="info-strip">
     <div class="company-details">
         <div><i class="fas fa-building"></i> Power Build Tech Engineering Sdn Bhd</div>
-        <div><i class="fas fa-registered"></i> 202401034909 (1580756-U)</div>
+        <div><i class="fas fa-registered"></i> 202401034909</div>
         <div><i class="fas fa-location-dot"></i> 17 Jalan Beladau 6, Taman Puteri Wangsa, Ulu Tiram 81800, Johor, Malaysia</div>
-        <div><i class="fas fa-phone-alt"></i> <a href="tel:+60143929913">+60 14 392 9913</a></div>
+        <div><i class="fas fa-phone-alt"></i> <a href="tel:+60197204711">+60 197 204 711</a> / <a href="tel:+60143929913">+60 143 929 913</a></div>
         <div><i class="fas fa-envelope"></i> <a href="mailto:powerbuildmy@gmail.com">powerbuildmy@gmail.com</a></div>
-        <div><i class="fab fa-whatsapp"></i> <a href="https://wa.me/+60143929913" target="_blank">WhatsApp: +60 14 392 9913</a></div>
+        <div><i class="fab fa-whatsapp"></i> <a href="https://wa.me/+60143929913" target="_blank">WhatsApp: +60 143 929 913</a></div>
         <div><i class="fas fa-globe"></i> powerbuild.com.my</div>
     </div>
     <div class="badge-note">
@@ -260,27 +324,31 @@
     </div>
 </div>
 
-<!-- Floating WhatsApp button (direct contact) -->
+<!-- Floating WhatsApp button -->
 <a href="https://wa.me/+60143929913" class="float-wa" target="_blank" rel="noopener noreferrer">
     <i class="fab fa-whatsapp"></i>
     <span class="wa-tooltip">Chat with Power Build</span>
 </a>
 
+<!-- FOOTER (minimalist compliance with new number only) -->
 <footer>
-    <p>© 2026 Power Build Tech Engineering Sdn Bhd (1580756-U) — Redefining Lubricant Technology. All rights reserved.</p>
-    <p style="margin-top:6px;"><i class="fas fa-map-marker-alt"></i> 17 Jalan Beladau 6, Taman Puteri Wangsa, Ulu Tiram 81800, Johor, Malaysia | <i class="fas fa-headset"></i> Real support. True partnership.</p>
+    <p>© 2026 Power Build Tech Engineering Sdn Bhd (202401034909) — Redefining Lubricant Technology.</p>
+    <p style="margin-top:6px;">
+        <i class="fas fa-phone-alt"></i> +60 197 204 711 &nbsp;|&nbsp; 
+        <i class="fas fa-phone-alt"></i> +60 143 929 913 &nbsp;|&nbsp;
+        <i class="fas fa-envelope"></i> powerbuildmy@gmail.com &nbsp;|&nbsp;
+        <i class="fab fa-whatsapp"></i> <a href="https://wa.me/+60143929913" style="color:#FFD966;">WhatsApp</a>
+    </p>
+    <p style="margin-top:8px;"><i class="fas fa-map-marker-alt"></i> 17 Jalan Beladau 6, Taman Puteri Wangsa, Ulu Tiram 81800, Johor, Malaysia</p>
 </footer>
 
 <script>
-    // ensure all whatsapp links are secure
+    // Ensure all external links open safely
     document.querySelectorAll('a[href^="https://wa.me"]').forEach(anchor => {
         anchor.setAttribute('target', '_blank');
         anchor.setAttribute('rel', 'noopener noreferrer');
     });
-    // small console confirmation
-    console.log("Power Build Tech Engineering — Flyers displayed: coverpage.png and backcover.png side by side.");
-    // If images fail to load, the placeholder will appear, but user will see the filenames expected.
+    console.log("Power Build Tech Engineering — Minimalist: only new SSM number 202401034909 displayed.");
 </script>
-
 </body>
 </html>
