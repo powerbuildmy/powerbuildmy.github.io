@@ -29,13 +29,13 @@
             height: 100%;
             pointer-events: none;
             z-index: 9999;
-            overflow: hidden;
+            overflow-x: hidden;
         }
         
-        /* Car animation - drives from right to left with fade in/out */
-        @keyframes driveAcross {
+        /* NEW: Car drives FULL LEFT until it hits the wall */
+        @keyframes driveToTheWall {
             0% {
-                transform: translateX(100vw) translateY(0);
+                transform: translateX(0) translateY(0);
                 opacity: 0;
             }
             10% {
@@ -45,7 +45,7 @@
                 opacity: 1;
             }
             100% {
-                transform: translateX(-300px) translateY(0);
+                transform: translateX(-100vw) translateY(0);
                 opacity: 0;
             }
         }
@@ -54,7 +54,7 @@
             position: absolute;
             bottom: 30%;
             right: 0;
-            animation: driveAcross 4s ease-in-out forwards;
+            animation: driveToTheWall 4s linear forwards;
         }
         
         .cinema-car img {
@@ -63,7 +63,7 @@
             display: block;
         }
         
-        /* Letter trail container */
+        /* Letter trail container - follows the car */
         .letter-trail {
             position: absolute;
             bottom: calc(30% + 50px);
@@ -76,6 +76,7 @@
             text-shadow: 0 0 15px rgba(212,175,55,0.8), 2px 2px 4px rgba(0,0,0,0.5);
             letter-spacing: 4px;
             pointer-events: none;
+            animation: driveToTheWall 4s linear forwards;
         }
         
         .letter-trail span {
@@ -274,13 +275,13 @@
             }, index * intervalTime);
         });
         
-        // Clean up after animation
+        // Clean up after animation (a bit longer to ensure it exits the screen)
         setTimeout(() => {
             if (activeCinema === container) {
                 container.remove();
                 activeCinema = null;
             }
-        }, 4800);
+        }, 5000);
     }
     
     if (ep2Element) {
