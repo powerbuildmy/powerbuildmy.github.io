@@ -9,48 +9,101 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="favicon.png">
     <style>
-        /* Override product card sizes to double */
+        /* Override product card styles */
         .products-grid {
             max-width: 1400px;
-            gap: 2.5rem;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
         }
         
         .product-card {
-            width: 520px;  /* Was 260px — doubled */
-            border-radius: 2rem;
+            width: calc(25% - 1.125rem);  /* 4 cards per row */
+            min-width: 220px;
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.25s;
+            border: 1px solid #E8E0D0;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.03);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-4px);
+            border-color: #D4AF37;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        }
+        
+        /* Magnified image */
+        .product-img {
+            width: 100%;
+            background: #F9F6EF;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .product-img img {
+            width: 85%;
+            height: auto;
+            display: block;
+            transition: transform 0.2s ease;
+        }
+        
+        .product-card:hover .product-img img {
+            transform: scale(1.03);
+        }
+        
+        /* Compact text area */
+        .product-info {
+            padding: 0.8rem 0.8rem 1rem;
+            text-align: center;
+            border-top: 1px solid #F0EDE5;
         }
         
         .product-info h3 {
-            font-size: 1.5rem;  /* Was 1.1rem — bigger */
-            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            color: #1E2A3A;
         }
         
         .product-info p {
-            font-size: 0.95rem;  /* Was 0.75rem */
+            font-size: 0.7rem;
+            color: #5A6E7A;
+            line-height: 1.3;
         }
         
         .arrow {
-            font-size: 1rem;  /* Was 0.8rem */
-            margin-top: 0.75rem;
+            margin-top: 0.4rem;
+            font-size: 0.75rem;
+            color: #D4AF37;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
         
-        .product-info {
-            padding: 1.5rem 1.5rem 1.8rem;
-        }
-        
-        @media (max-width: 1200px) {
+        /* Responsive */
+        @media (max-width: 1000px) {
             .product-card {
-                width: 45%;
-                min-width: 320px;
+                width: calc(50% - 0.75rem);
+            }
+            .product-img img {
+                width: 70%;
             }
         }
         
-        @media (max-width: 700px) {
+        @media (max-width: 600px) {
             .product-card {
                 width: 100%;
             }
-            .product-info h3 {
-                font-size: 1.3rem;
+            .product-img img {
+                width: 60%;
             }
         }
     </style>
@@ -86,19 +139,19 @@
 <div class="products-grid">
     <a href="ef.html" class="product-card">
         <div class="product-img"><img src="ef.webp" alt="Engine Treatment"></div>
-        <div class="product-info"><h3>Engine Treatment</h3><p>Eliminates 96% wear · Extends oil change intervals 2-3x</p><div class="arrow">View →</div></div>
+        <div class="product-info"><h3>Engine Treatment</h3><p>Eliminates 96% wear · Extends oil change</p><div class="arrow">VIEW →</div></div>
     </a>
     <a href="pl.html" class="product-card">
         <div class="product-img"><img src="pl.webp" alt="Penetrating Lubricant"></div>
-        <div class="product-info"><h3>Penetrating Lubricant</h3><p>20x more effective · Penetrates rust · Displaces moisture</p><div class="arrow">View →</div></div>
+        <div class="product-info"><h3>Penetrating Lubricant</h3><p>20x more effective · Penetrates rust</p><div class="arrow">VIEW →</div></div>
     </a>
     <a href="ep2.html" class="product-card">
         <div class="product-img"><img src="ep2.webp" alt="EP2 Lithium Grease"></div>
-        <div class="product-info"><h3>EP2 Lithium Grease</h3><p>Multi-purpose · Wide temperature range · Eliminates 96% bearing wear</p><div class="arrow">View →</div></div>
+        <div class="product-info"><h3>EP2 Lithium Grease</h3><p>Multi-purpose · Wide temperature range</p><div class="arrow">VIEW →</div></div>
     </a>
     <a href="fc.html" class="product-card">
         <div class="product-img"><img src="fc.webp" alt="Fuel Conditioner"></div>
-        <div class="product-info"><h3>Fuel Conditioner</h3><p>Improves fuel quality · Cleans injectors · Maximizes mileage</p><div class="arrow">View →</div></div>
+        <div class="product-info"><h3>Fuel Conditioner</h3><p>Improves fuel quality · Maximizes mileage</p><div class="arrow">VIEW →</div></div>
     </a>
 </div>
 
