@@ -3,11 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Power Build | EP2 Lithium Grease</title>
+    <title>Power Build | EP2 Lithium Grease - Multi-Purpose High Temperature Grease</title>
+    <meta name="description" content="Power Build EP2 Lithium Grease. Multi-purpose high-temperature grease for automotive, industrial, and marine applications. Excellent water resistance, extreme pressure protection, wide temperature range.">
+    <meta name="keywords" content="EP2 lithium grease Malaysia, high temperature grease, multipurpose grease, industrial grease, Power Build EP2, lithium grease for bearings">
+    <meta name="author" content="Power Build Tech Engineering Sdn Bhd">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://powerbuild.com/ep2.html">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        .flyer-image {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.1s ease;
+            display: inline-block;
+            width: 100%;
+        }
+        .flyer-image:active {
+            transform: scale(0.99);
+        }
+        
+        .cinema-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            overflow-x: hidden;
+        }
+        
+        @keyframes driveToTheWall {
+            0% {
+                transform: translateX(0) translateY(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            85% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-100vw) translateY(0);
+                opacity: 0;
+            }
+        }
+        
+        .cinema-car {
+            position: absolute;
+            bottom: 3%;
+            right: 0;
+            animation: driveToTheWall 5s linear forwards;
+        }
+        
+        .cinema-car img {
+            width: 600px;
+            max-width: 80vw;
+            height: auto;
+            display: block;
+            background: transparent;
+        }
+        
+        @keyframes dustPuff {
+            0% { transform: scale(0); opacity: 0.8; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+        
+        .dust {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: rgba(212,175,55,0.5);
+            border-radius: 50%;
+            animation: dustPuff 0.6s ease-out forwards;
+        }
+        
+        @media (max-width: 700px) {
+            .cinema-car img {
+                width: 320px;
+            }
+            .cinema-car {
+                bottom: 2%;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -31,11 +114,13 @@
     </div>
 </nav>
 
-<div class="image-page">
-    <div class="flyer-image">
-        <img src="ep2.webp" alt="Power Build EP2 Lithium Grease">
+<main>
+    <div class="image-page">
+        <div class="flyer-image" id="ep2Pail">
+            <img src="ep2.webp" alt="Power Build EP2 Lithium Grease pail - Multi-purpose high temperature grease for industrial and automotive applications">
+        </div>
     </div>
-</div>
+</main>
 
 <footer>
     <div class="footer-content">
@@ -68,14 +153,100 @@
     <span class="wa-tooltip">Chat with us</span>
 </a>
 
+<audio id="greaseSound" preload="auto" style="display: none;">
+    <source src="grease-sound.mp3" type="audio/mpeg">
+</audio>
+
 <script>
     const mobileBtn = document.getElementById('mobileMenu');
     const navLinks = document.getElementById('navLinks');
-    if (mobileBtn) mobileBtn.addEventListener('click', () => navLinks.classList.toggle('show'));
+    if (mobileBtn) {
+        mobileBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+        });
+    }
+
     const currentPage = window.location.pathname.split('/').pop();
     document.querySelectorAll('.nav-links a').forEach(link => {
-        if (link.getAttribute('href') === currentPage) link.classList.add('active');
+        if (link.getAttribute('href') === currentPage) {
+            link.classList.add('active');
+        }
     });
+
+    // Easter egg preserved!
+    const ep2Element = document.getElementById('ep2Pail');
+    let activeCinema = null;
+    const sound = document.getElementById('greaseSound');
+    
+    function createDust(x, y, count) {
+        for (let i = 0; i < count; i++) {
+            const dust = document.createElement('div');
+            dust.className = 'dust';
+            dust.style.left = (x + (Math.random() - 0.5) * 40) + 'px';
+            dust.style.top = (y + (Math.random() - 0.5) * 20) + 'px';
+            document.body.appendChild(dust);
+            setTimeout(() => dust.remove(), 600);
+        }
+    }
+    
+    function playSound() {
+        if (sound) {
+            sound.currentTime = 0;
+            sound.play().catch(e => console.log('Audio play failed:', e));
+        }
+    }
+    
+    function showCinematic() {
+        if (activeCinema) {
+            activeCinema.remove();
+        }
+        
+        const container = document.createElement('div');
+        container.className = 'cinema-container';
+        
+        const carDiv = document.createElement('div');
+        carDiv.className = 'cinema-car';
+        const carImg = document.createElement('img');
+        carImg.src = 'car.png';
+        carImg.alt = 'Grease lubricant demonstration car';
+        carImg.style.background = 'transparent';
+        carImg.onerror = function() {
+            this.style.display = 'none';
+            const fallback = document.createElement('div');
+            fallback.style.width = '500px';
+            fallback.style.height = '180px';
+            fallback.style.background = '#C5A028';
+            fallback.style.borderRadius = '16px';
+            fallback.style.display = 'flex';
+            fallback.style.alignItems = 'center';
+            fallback.style.justifyContent = 'center';
+            fallback.style.color = '#fff';
+            fallback.style.fontWeight = 'bold';
+            fallback.style.fontSize = '1.5rem';
+            fallback.innerHTML = '🚗 GREASE CAR 🚗';
+            carDiv.appendChild(fallback);
+        };
+        carDiv.appendChild(carImg);
+        container.appendChild(carDiv);
+        
+        document.body.appendChild(container);
+        activeCinema = container;
+        
+        setTimeout(() => {
+            if (activeCinema === container) {
+                container.remove();
+                activeCinema = null;
+            }
+        }, 5500);
+    }
+    
+    if (ep2Element) {
+        ep2Element.addEventListener('click', (e) => {
+            playSound();
+            createDust(e.clientX, e.clientY, 6);
+            showCinematic();
+        });
+    }
 </script>
 </body>
 </html>

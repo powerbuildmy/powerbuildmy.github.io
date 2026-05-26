@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Power Build | Mission</title>
+    <title>Power Build | Our Mission - Sustainable Industrial Solutions</title>
+    <meta name="description" content="Power Build's mission is to deliver advanced metal treatment technology that reduces friction, saves energy, lowers emissions, and extends machinery life across Malaysia and beyond.">
+    <meta name="keywords" content="Power Build mission, sustainable lubricants, energy saving lubricants, reduce emissions Malaysia, industrial sustainability, green technology lubricants">
+    <meta name="author" content="Power Build Tech Engineering Sdn Bhd">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://powerbuild.com/mission.html">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
@@ -31,11 +36,13 @@
     </div>
 </nav>
 
-<div class="image-page">
-    <div class="flyer-image">
-        <img src="mission.webp" alt="Power Build Mission - Global Mission Statement">
+<main>
+    <div class="image-page">
+        <div class="flyer-image">
+            <img src="mission.webp" alt="Power Build Mission - Global mission statement for sustainable industrial lubrication and metal treatment technology">
+        </div>
     </div>
-</div>
+</main>
 
 <footer>
     <div class="footer-content">
@@ -71,9 +78,7 @@
 <script>
     const mobileBtn = document.getElementById('mobileMenu');
     const navLinks = document.getElementById('navLinks');
-    if (mobileBtn) {
-        mobileBtn.addEventListener('click', () => navLinks.classList.toggle('show'));
-    }
+    if (mobileBtn) mobileBtn.addEventListener('click', () => navLinks.classList.toggle('show'));
     const currentPage = window.location.pathname.split('/').pop();
     document.querySelectorAll('.nav-links a').forEach(link => {
         if (link.getAttribute('href') === currentPage) link.classList.add('active');
