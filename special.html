@@ -67,9 +67,9 @@
     <!-- Main container: same width for image and text -->
     <div style="max-width: 1000px; margin: 0 auto; padding: 0 20px;">
         
-        <!-- Image block -->
-        <div style="background: white; border-radius: 28px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.05); margin-bottom: 2rem;">
-            <img src="350ml.webp" alt="Power Build Engine Treatment 350ml" style="width: 100%; height: auto; display: block;">
+        <!-- ✅ UPDATED: Slideshow image block -->
+        <div id="slideshow-container" style="background: white; border-radius: 28px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.05); margin-bottom: 2rem;">
+            <!-- The image will be injected by JavaScript below -->
         </div>
 
         <!-- Content block -->
@@ -138,7 +138,7 @@
                 </a>
             </div>
 
-            <!-- UPDATED: DIY or Workshop Service section with your exact new copy -->
+            <!-- DIY or Workshop Service -->
             <div style="background: #e3f2fd; border-radius: 28px; padding: 1.5rem; margin: 2rem 0; text-align: left; border-left: 5px solid #1a3a8f;">
                 <h3 style="color: #1a3a8f; margin-top: 0; display: flex; align-items: center; gap: 10px;"><i class="fas fa-oil-can"></i> DIY Application or Workshop Service – Your Choice</h3>
                 
@@ -226,12 +226,52 @@
 </a>
 
 <script>
+    // Mobile menu toggle
     const mobileBtn = document.getElementById('mobileMenu');
     const navLinks = document.getElementById('navLinks');
     if (mobileBtn) mobileBtn.addEventListener('click', () => navLinks.classList.toggle('show'));
+
+    // Active link highlight
     const currentPage = window.location.pathname.split('/').pop();
     document.querySelectorAll('.nav-links a').forEach(link => {
         if (link.getAttribute('href') === currentPage) link.classList.add('active');
+    });
+
+    // ============================================================
+    // 🖼️ 3-IMAGE SLIDESHOW – FADE TRANSITION
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', function() {
+        const container = document.getElementById('slideshow-container');
+        if (!container) return;
+
+        // The 3 images in order: English, Chinese, Malay
+        const images = [
+            '350ml.webp',
+            '350mlc.webp',
+            '350mlm.webp'
+        ];
+        let currentIndex = 0;
+
+        // Create the image element
+        const img = document.createElement('img');
+        img.src = images[0];
+        img.alt = 'Power Build Engine Treatment 350ml – English / Chinese / Malay';
+        img.style.cssText = 'width:100%; height:auto; display:block; transition: opacity 1s ease; opacity:1;';
+        container.appendChild(img);
+
+        // Rotate every 5 seconds
+        setInterval(() => {
+            // Fade out
+            img.style.opacity = '0';
+            
+            setTimeout(() => {
+                // Switch to next image
+                currentIndex = (currentIndex + 1) % images.length;
+                img.src = images[currentIndex];
+                // Fade in
+                img.style.opacity = '1';
+            }, 1000); // match the transition duration (1s)
+        }, 5000);
     });
 </script>
 </body>
