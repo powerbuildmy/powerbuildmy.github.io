@@ -67,9 +67,9 @@
     <!-- Main container: same width for image and text -->
     <div style="max-width: 1000px; margin: 0 auto; padding: 0 20px;">
         
-        <!-- ✅ UPDATED: Slideshow image block (6 images, with pbs.webp at positions 2, 4, 6) -->
-        <div id="slideshow-container" style="background: white; border-radius: 28px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.05); margin-bottom: 2rem;">
-            <!-- The image will be injected by JavaScript below -->
+        <!-- ✅ UPDATED: Slideshow with crossfade transition (no white-out) -->
+        <div id="slideshow-container" style="background: #f5f7fa; border-radius: 28px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.05); margin-bottom: 2rem; width:100%; display: grid; grid-template-columns: 1fr; grid-template-rows: auto;">
+            <!-- Images will be injected by JavaScript below -->
         </div>
 
         <!-- Content block -->
@@ -238,14 +238,18 @@
     });
 
     // ============================================================
-    // 🖼️ 6-IMAGE SLIDESHOW – FADE TRANSITION
+    // 🖼️ 6-IMAGE CROSSFADE SLIDESHOW (NO WHITE-OUT)
     // ============================================================
     document.addEventListener('DOMContentLoaded', function() {
         const container = document.getElementById('slideshow-container');
         if (!container) return;
 
-        // The 6 images in order:
-        // 350ml.webp → pbs.webp → 350mlc.webp → pbs.webp → 350mlm.webp → pbs.webp
+        // Ensure container uses grid to stack images perfectly
+        container.style.display = 'grid';
+        container.style.gridTemplateColumns = '1fr';
+        container.style.gridTemplateRows = 'auto';
+        container.style.background = '#f5f7fa'; // match page background
+
         const images = [
             '350ml.webp',
             'pbs.webp',
@@ -256,25 +260,60 @@
         ];
         let currentIndex = 0;
 
-        // Create the image element
-        const img = document.createElement('img');
-        img.src = images[0];
-        img.alt = 'Power Build Engine Treatment 350ml – English / Special / Chinese / Special / Malay / Special';
-        img.style.cssText = 'width:100%; height:auto; display:block; transition: opacity 1s ease; opacity:1;';
-        container.appendChild(img);
+        // Create two image elements, both in the same grid cell
+        const img1 = document.createElement('img');
+        const img2 = document.createElement('img');
 
-        // Rotate every 5 seconds
+        // Styles for both images
+        const imgStyle = {
+            gridColumn: '1 / 2',
+            gridRow: '1 / 2',
+            width: '100%',
+            height: 'auto',
+            display: 'block',
+            transition: 'opacity 1s ease',
+            backfaceVisibility: 'hidden'
+        };
+
+        Object.assign(img1.style, imgStyle);
+        Object.assign(img2.style, imgStyle);
+
+        img1.src = images[0];
+        img1.alt = 'Power Build Engine Treatment';
+        img1.style.opacity = '1';
+
+        // Pre-load the second image
+        img2.src = images[1 % images.length];
+        img2.alt = 'Power Build Engine Treatment';
+        img2.style.opacity = '0';
+
+        container.appendChild(img1);
+        container.appendChild(img2);
+
+        let activeImg = img1;
+        let hiddenImg = img2;
+
         setInterval(() => {
-            // Fade out
-            img.style.opacity = '0';
+            // Load the next image into the hidden one
+            const nextIndex = (currentIndex + 1) % images.length;
+            hiddenImg.src = images[nextIndex];
             
+            // Crossfade: active fades out, hidden fades in
+            activeImg.style.opacity = '0';
+            hiddenImg.style.opacity = '1';
+
+            // After transition, swap roles
             setTimeout(() => {
-                // Switch to next image
-                currentIndex = (currentIndex + 1) % images.length;
-                img.src = images[currentIndex];
-                // Fade in
-                img.style.opacity = '1';
-            }, 1000); // match the transition duration (1s)
+                // Swap references
+                const temp = activeImg;
+                activeImg = hiddenImg;
+                hiddenImg = temp;
+                
+                // Reset the now-hidden old active image to opacity 0 (it's already 0)
+                hiddenImg.style.opacity = '0';
+                
+                currentIndex = nextIndex;
+            }, 1000); // Match transition duration (1s)
         }, 5000);
     });
 </script>
