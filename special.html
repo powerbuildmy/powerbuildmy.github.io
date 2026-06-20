@@ -67,7 +67,7 @@
     <!-- Main container: same width for image and text -->
     <div style="max-width: 1000px; margin: 0 auto; padding: 0 20px;">
         
-        <!-- ✅ UPDATED: Slideshow image block -->
+        <!-- ✅ UPDATED: Slideshow image block (5 images, with pbs.webp twice) -->
         <div id="slideshow-container" style="background: white; border-radius: 28px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.05); margin-bottom: 2rem;">
             <!-- The image will be injected by JavaScript below -->
         </div>
@@ -238,16 +238,18 @@
     });
 
     // ============================================================
-    // 🖼️ 3-IMAGE SLIDESHOW – FADE TRANSITION
+    // 🖼️ 5-IMAGE SLIDESHOW – FADE TRANSITION
     // ============================================================
     document.addEventListener('DOMContentLoaded', function() {
         const container = document.getElementById('slideshow-container');
         if (!container) return;
 
-        // The 3 images in order: English, Chinese, Malay
+        // The 5 images in order: English, Special, Chinese, Special, Malay
         const images = [
             '350ml.webp',
+            'pbs.webp',
             '350mlc.webp',
+            'pbs.webp',
             '350mlm.webp'
         ];
         let currentIndex = 0;
@@ -255,7 +257,7 @@
         // Create the image element
         const img = document.createElement('img');
         img.src = images[0];
-        img.alt = 'Power Build Engine Treatment 350ml – English / Chinese / Malay';
+        img.alt = 'Power Build Engine Treatment 350ml – English / Special / Chinese / Special / Malay';
         img.style.cssText = 'width:100%; height:auto; display:block; transition: opacity 1s ease; opacity:1;';
         container.appendChild(img);
 
