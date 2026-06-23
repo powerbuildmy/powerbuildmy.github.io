@@ -213,10 +213,10 @@
             background: rgba(200, 0, 0, 0.10);
             border: 1px solid rgba(200, 0, 0, 0.2);
             border-radius: 100px;
-            padding: 0.4rem 2rem;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 2px;
+            padding: 0.6rem 2.8rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 3px;
             color: #8a1a1a;
             text-transform: uppercase;
             margin-bottom: 1.2rem;
@@ -279,7 +279,7 @@
             border-radius: 28px;
             overflow: hidden;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-            margin: 2rem 0 1rem;
+            margin: 2rem 0 0;
             background: rgba(240, 237, 230, 0.85);
             backdrop-filter: blur(4px);
             border: 1px solid rgba(200, 0, 0, 0.08);
@@ -338,155 +338,14 @@
             padding: 0;
         }
 
-        /* ─── CONTENT BLOCK ─── */
-        .content-block {
-            background: rgba(255, 255, 255, 0.88);
-            backdrop-filter: blur(4px);
-            border-radius: 28px;
-            padding: 2.5rem;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-            margin-top: 0.5rem;
-        }
-
-        .content-block .tag {
-            display: inline-block;
-            background: #1a3a8f;
-            color: white;
-            padding: 0.3rem 1.2rem;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        .content-block h1 {
-            color: #1a1a2e;
-            font-size: 2.8rem;
-            font-weight: 800;
-            margin: 0.5rem 0 0.2rem;
-            line-height: 1.1;
-        }
-
-        .content-block h1 .red {
-            background: linear-gradient(145deg, #cc0000, #990000);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .content-block .subhead {
-            color: #B22222;
-            font-weight: 700;
-            font-size: 1.4rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .content-block .subhead-small {
-            color: #4a4a5e;
-            font-weight: 400;
-            font-size: 1.1rem;
-            margin-top: 0.2rem;
-        }
-
-        .content-block p {
-            font-size: 1.05rem;
-            line-height: 1.6;
-            color: #1e2a3e;
-        }
-
-        /* ─── HIGHLIGHT BOX (How It Works) ─── */
-        .highlight-box {
-            background: rgba(248, 246, 240, 0.85);
-            backdrop-filter: blur(4px);
-            border-radius: 28px;
-            padding: 1.8rem;
-            margin: 2rem 0;
-            border: none;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.02);
-        }
-
-        .highlight-box h2 {
-            color: #1a3a8f;
-            margin-top: 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 3px solid #B22222;
-            padding-bottom: 0.8rem;
-        }
-
-        .highlight-box h2 i {
-            color: #B22222;
-        }
-
-        .highlight-box ul {
-            margin: 0.5rem 0 0 1.2rem;
-            line-height: 1.6;
-        }
-
-        /* ─── STATS ─── */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .stats-grid .stat {
-            background: rgba(248, 246, 240, 0.85);
-            backdrop-filter: blur(4px);
-            border-radius: 20px;
-            padding: 1.2rem;
-            text-align: center;
-        }
-
-        .stats-grid .stat .number {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #B22222;
-        }
-
-        .stats-grid .stat .label {
-            font-weight: 600;
-        }
-
-        .stats-grid .stat small {
-            color: #666;
-        }
-
-        .benefit-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .benefit-grid .benefit {
-            background: rgba(248, 246, 240, 0.85);
-            backdrop-filter: blur(4px);
-            border-radius: 20px;
-            padding: 1.2rem;
-            text-align: center;
-        }
-
-        .benefit-grid .benefit i {
-            font-size: 2rem;
-            color: #B22222;
-        }
-
-        .benefit-grid .benefit h3 {
-            color: #1a3a8f;
-            margin: 0.5rem 0;
-        }
-
-        /* ─── FOOTER ─── */
+        /* ─── FOOTER (LIGHT) ─── */
         footer {
-            background: rgba(11, 13, 16, 0.92);
-            backdrop-filter: blur(8px);
-            color: #9aa7bb;
+            background: #f8f6f0;
+            color: #1a1a2e;
             padding: 2.5rem 2rem 1.5rem;
             margin-top: 2rem;
+            border-top: 3px solid #B22222;
+            box-shadow: 0 -4px 20px rgba(178, 34, 34, 0.06);
         }
 
         .footer-content {
@@ -500,19 +359,48 @@
         .footer-col h4 {
             color: #B22222;
             margin-bottom: 0.8rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        .footer-col p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #2a2a3e;
+        }
+
+        .footer-col a {
+            color: #2a2a3e;
+            text-decoration: none;
+            transition: 0.3s;
+            border-bottom: 1px solid transparent;
         }
 
         .footer-col a:hover {
             color: #B22222;
+            border-bottom-color: #B22222;
+        }
+
+        .footer-col i {
+            color: #B22222;
+            width: 20px;
+            text-align: center;
+            margin-right: 6px;
         }
 
         .copyright {
             max-width: 1200px;
             margin: 2rem auto 0;
             padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            border-top: 1px solid rgba(178, 34, 34, 0.12);
             text-align: center;
             font-size: 0.8rem;
+            color: #4a4a5e;
+        }
+
+        .copyright strong {
+            color: #B22222;
         }
 
         /* ─── FLOATING WHATSAPP ─── */
@@ -562,11 +450,9 @@
                 min-height: 400px;
                 padding: 2rem 1.5rem;
             }
-            .content-block {
-                padding: 1.2rem;
-            }
-            .content-block h1 {
-                font-size: 2rem;
+            .flyer-image .badge {
+                font-size: 0.9rem;
+                padding: 0.4rem 1.8rem;
             }
         }
 
@@ -584,6 +470,11 @@
             .flyer-image .pills span {
                 font-size: 0.7rem;
                 padding: 0.3rem 0.8rem;
+            }
+            .flyer-image .badge {
+                font-size: 0.75rem;
+                padding: 0.3rem 1.2rem;
+                letter-spacing: 1px;
             }
         }
     </style>
@@ -645,101 +536,9 @@
         <button id="nextSlide" aria-label="Next slide">›</button>
     </div>
 
-    <!-- CONTENT BLOCK -->
-    <div class="content-block">
-        <div style="text-align: center; margin-bottom: 1.5rem;">
-            <span class="tag">⚡ NEXT-GEN MOLECULAR TREATMENT ⚡</span>
-            <h1>MORE POWER TO THE PEOPLE</h1>
-            <div class="subhead">POWER BUILD 350ML</div>
-            <div class="subhead-small">ENGINE TREATMENT</div>
-        </div>
-
-        <p>Big protection now comes in a compact size. Experience industrial-grade protection in an everyday 350ml size. Powered by verified advanced molecular metal treatment technology, our eco‑friendly formula helps Malaysian drivers slash emissions and maximize fuel economy. Save money, extend your engine's lifespan, and drive toward a cleaner tomorrow.</p>
-
-        <!-- How It Works – Red underline -->
-        <div class="highlight-box">
-            <h2><i class="fas fa-microscope"></i> How It Works – Molecular Metal Treatment</h2>
-            <p><strong>Power Build is NOT an oil additive. It is a permanent molecular treatment.</strong> Originally developed for military use and extreme environments, our positively charged molecules are magnetically attracted to the negatively charged metal surface inside your engine. Under heat and pressure, they bond permanently, penetrating <strong>up to 0.5 micron deep</strong> – creating an ultra-smooth, hardened surface that virtually eliminates friction and wear.</p>
-            <ul>
-                <li>✅ <strong>Permanent bonding</strong> – does not wash away with oil changes</li>
-                <li>✅ <strong>Extends oil change intervals</strong> by 2 to 3 times</li>
-                <li>✅ <strong>Lowers engine temperature &amp; noise</strong> – less friction = less heat</li>
-                <li>✅ <strong>Compatible with all petrol &amp; diesel engines</strong> – including 2-stroke and wet clutches (except brake systems)</li>
-            </ul>
-            <p style="font-size: 0.85rem; margin-top: 0.8rem; color: #555;"><i class="fas fa-flask"></i> The result: permanent protection, lasting performance, and verified fuel savings.</p>
-        </div>
-
-        <!-- Benefit Grid -->
-        <div class="benefit-grid">
-            <div class="benefit"><i class="fas fa-leaf"></i><h3>Cut Emissions &amp; Save Fuel</h3></div>
-            <div class="benefit"><i class="fas fa-rocket"></i><h3>Boost Performance</h3></div>
-            <div class="benefit"><i class="fas fa-heartbeat"></i><h3>Prolong Engine Lifespan</h3></div>
-            <div class="benefit"><i class="fas fa-oil-can"></i><h3>Extend Oil Change 2-3x</h3></div>
-        </div>
-
-        <p style="text-align: center; font-size: 0.85rem; color: #666;">✓ Compatible with all petrol &amp; diesel engines • 350ml treats up to 6L of oil • Safe for 2-stroke and wet clutches</p>
-
-        <!-- Stats -->
-        <div style="margin-top: 2rem;">
-            <h2 style="color: #1a3a8f; text-align: center; margin-bottom: 1.5rem;">Why Power Build Engine Formulation 350ml</h2>
-            <div class="stats-grid">
-                <div class="stat">
-                    <div class="number">350ml</div>
-                    <div class="label">Convenient size</div>
-                    <small>Perfect for 1 car or small fleet trial</small>
-                </div>
-                <div class="stat">
-                    <div class="number">8.86%</div>
-                    <div class="label">Avg fuel savings*</div>
-                    <small>Marine trial (10 vessels)</small>
-                </div>
-                <div class="stat">
-                    <div class="number">12.74%</div>
-                    <div class="label">Peak improvement</div>
-                    <small>During active treatment</small>
-                </div>
-                <div class="stat">
-                    <div class="number">1,119%</div>
-                    <div class="label">Monthly ROI</div>
-                    <small>RM9,265 net savings per vessel</small>
-                </div>
-            </div>
-            <p style="text-align: center; font-size: 0.8rem; color: #555; margin-top: 0.5rem;">
-                *Based on Johor Port POC (March–October 2025, 10 vessels). Residual efficiency of +2.89% persists after treatment stops.<br>
-                🚗 <strong>Road vehicles operate under stable conditions – you may achieve even higher fuel savings than marine trials.</strong> Contact us for fleet testing.
-            </p>
-        </div>
-    </div>
-
 </div>
 
-<!-- ═══ FOOTER ═══ -->
-<footer>
-    <div class="footer-content">
-        <div class="footer-col">
-            <h4>POWER BUILD</h4>
-            <p>Tech Engineering Sdn Bhd<br>202401034909</p>
-            <p><i class="fas fa-map-marker-alt"></i> 17 Jalan Beladau 6, Taman Puteri Wangsa, Ulu Tiram 81800, Johor, Malaysia</p>
-        </div>
-        <div class="footer-col">
-            <h4>Contact</h4>
-            <p><i class="fas fa-phone"></i> <a href="tel:+60197204711">+60 197 204 711</a> / <a href="tel:+60143929913">+60 143 929 913</a></p>
-            <p><i class="fas fa-envelope"></i> <a href="mailto:info@powerbuild.com.my">info@powerbuild.com.my</a></p>
-            <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/+60143929913" target="_blank">WhatsApp: +60 143 929 913</a></p>
-        </div>
-        <div class="footer-col">
-            <h4>Quick Links</h4>
-            <p><a href="about.html">About</a></p>
-            <p><a href="products.html">Products</a></p>
-            <p><a href="mission.html">Mission</a></p>
-            <p><a href="proof.html">The Proof</a></p>
-            <p><a href="special.html">Special</a></p>
-        </div>
-    </div>
-    <div class="copyright">
-        <p>© 2026 Power Build Tech Engineering Sdn Bhd (202401034909) — Built for Power. Designed for Endurance.</p>
-    </div>
-</footer>
+<!--#include file="footer.html" -->
 
 <!-- ═══ FLOATING WHATSAPP ═══ -->
 <a href="https://wa.me/+60143929913" class="float-wa" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp">
