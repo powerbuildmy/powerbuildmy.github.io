@@ -82,105 +82,21 @@
             padding: 0 20px;
         }
 
-        /* ─── PUNCHLINE HERO ─── */
-        .flyer-image {
+        /* ─── HERO IMAGE (special.webp) ─── */
+        .hero-image-wrapper {
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+            margin: 0 0 2rem 0;
             background: rgba(250, 248, 244, 0.85);
             backdrop-filter: blur(4px);
-            border-radius: 28px;
-            padding: 3rem 2.5rem;
-            text-align: center;
-            border: 1px solid rgba(200, 0, 0, 0.15);
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(200, 0, 0, 0.08);
+        }
+
+        .hero-image-wrapper img {
             width: 100%;
-            aspect-ratio: 1558 / 1009;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .flyer-image::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: 
-                radial-gradient(circle at 60% 40%, rgba(200, 0, 0, 0.04), transparent 60%),
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" opacity="0.03"><path d="M0 100 L80 40 L160 80 L240 30 L320 70 L400 20 L400 180 L320 130 L240 170 L160 120 L80 160 L0 100" fill="none" stroke="%23B22222" stroke-width="2"/><circle cx="120" cy="80" r="6" fill="%23B22222"/><circle cx="280" cy="60" r="6" fill="%23B22222"/><circle cx="200" cy="140" r="5" fill="%23B22222"/></svg>') repeat;
-            background-size: 300px 150px;
-            pointer-events: none;
-        }
-
-        .flyer-image * {
-            position: relative;
-            z-index: 2;
-        }
-
-        .flyer-image .badge {
-            display: inline-block;
-            background: rgba(200, 0, 0, 0.10);
-            border: 1px solid rgba(200, 0, 0, 0.2);
-            border-radius: 100px;
-            padding: 0.6rem 2.8rem;
-            font-size: 1.2rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            color: #8a1a1a;
-            text-transform: uppercase;
-            margin-bottom: 1.2rem;
-        }
-
-        .flyer-image h1 {
-            font-size: clamp(2rem, 4.5vw, 4rem);
-            font-weight: 800;
-            line-height: 1.1;
-            color: #1a1a2e;
-            max-width: 900px;
-            margin: 0 auto 0.6rem;
-        }
-
-        .flyer-image h1 .red {
-            background: linear-gradient(145deg, #cc0000, #990000);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .flyer-image .sub {
-            font-size: clamp(1rem, 1.5vw, 1.4rem);
-            color: #3a3a4e;
-            font-weight: 400;
-            margin-bottom: 1.2rem;
-        }
-
-        .flyer-image .sub i {
-            color: #B22222;
-            margin-right: 6px;
-        }
-
-        .flyer-image .pills {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.8rem 1.8rem;
-        }
-
-        .flyer-image .pills span {
-            background: rgba(26, 26, 46, 0.03);
-            border: 1px solid rgba(200, 0, 0, 0.1);
-            padding: 0.4rem 1.2rem;
-            border-radius: 40px;
-            color: #2a2a3e;
-            font-size: 0.85rem;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .flyer-image .pills span i {
-            color: #B22222;
+            height: auto;
+            display: block;
         }
 
         /* ─── SLIDESHOW ─── */
@@ -289,14 +205,8 @@
         }
 
         @media (max-width: 768px) {
-            .flyer-image {
-                aspect-ratio: auto;
-                min-height: 400px;
-                padding: 2rem 1.5rem;
-            }
-            .flyer-image .badge {
-                font-size: 0.9rem;
-                padding: 0.4rem 1.8rem;
+            .main-container {
+                margin: 1rem auto;
             }
         }
 
@@ -307,18 +217,6 @@
                 font-size: 1.5rem;
                 bottom: 16px;
                 right: 16px;
-            }
-            .flyer-image h1 {
-                font-size: 1.6rem;
-            }
-            .flyer-image .pills span {
-                font-size: 0.7rem;
-                padding: 0.3rem 0.8rem;
-            }
-            .flyer-image .badge {
-                font-size: 0.75rem;
-                padding: 0.3rem 1.2rem;
-                letter-spacing: 1px;
             }
         }
     </style>
@@ -335,7 +233,6 @@
         })
         .then(data => {
             document.getElementById('navbar-placeholder').innerHTML = data;
-            // Re-run mobile menu toggle
             const mobileBtn = document.getElementById('mobileMenu');
             const navLinks = document.getElementById('navLinks');
             if (mobileBtn) {
@@ -344,7 +241,6 @@
                     navLinks.classList.toggle('show');
                 });
             }
-            // Highlight active page
             const currentPage = window.location.pathname.split('/').pop() || 'special.html';
             document.querySelectorAll('.nav-links a').forEach(link => {
                 if (link.getAttribute('href') === currentPage) {
@@ -360,23 +256,9 @@
 <!-- ═══ SINGLE MAIN CONTAINER ═══ -->
 <div class="main-container">
 
-    <!-- PUNCHLINE HERO -->
-    <div class="flyer-image">
-        <div class="badge"><i class="fas fa-bolt"></i> POWER BUILD 350ML</div>
-        <h1>
-            THE TECHNOLOGY THAT <br>
-            <span class="red">AUTOMATICALLY SAVES YOU</span><br>
-            <span class="red">UP TO 10% OR MORE ON FUEL EVERY DAY!</span>
-        </h1>
-        <div class="sub">
-            <i class="fas fa-gas-pump"></i> Less friction · More power · Lower emissions
-        </div>
-        <div class="pills">
-            <span><i class="fas fa-microscope"></i> Permanent molecular bonding · 0.5µ depth</span>
-            <span><i class="fas fa-chart-line"></i> Proven 8.86% fuel savings</span>
-            <span><i class="fas fa-oil-can"></i> Extends oil change 2–3x</span>
-            <span><i class="fas fa-car"></i> All petrol &amp; diesel engines</span>
-        </div>
+    <!-- ✅ HERO IMAGE (special.webp) – replaces old text block -->
+    <div class="hero-image-wrapper">
+        <img src="special.webp" alt="Power Build 350ml – The Technology That Automatically Saves You Up to 10% or More on Fuel Every Day" loading="lazy">
     </div>
 
     <!-- SLIDESHOW -->
