@@ -54,7 +54,6 @@
             min-height: 100vh;
         }
 
-        /* ─── WATERMARK BACKGROUND (ss5.webp) ─── */
         body::before {
             content: '';
             position: fixed;
@@ -68,21 +67,18 @@
             z-index: 0;
         }
 
-        /* ─── CONTENT LAYER ─── */
         .main-container,
         .float-wa {
             position: relative;
             z-index: 1;
         }
 
-        /* ─── SINGLE MAIN CONTAINER ─── */
         .main-container {
             max-width: 1200px;
             margin: 2rem auto;
             padding: 0 20px;
         }
 
-        /* ─── HERO IMAGE (special.webp) ─── */
         .hero-image-wrapper {
             border-radius: 28px;
             overflow: hidden;
@@ -91,15 +87,19 @@
             background: rgba(250, 248, 244, 0.85);
             backdrop-filter: blur(4px);
             border: 1px solid rgba(200, 0, 0, 0.08);
+            cursor: pointer;
+            transition: transform 0.2s ease;
         }
-
+        .hero-image-wrapper:hover {
+            transform: scale(1.005);
+        }
         .hero-image-wrapper img {
             width: 100%;
             height: auto;
             display: block;
+            pointer-events: none;
         }
 
-        /* ─── SLIDESHOW ─── */
         .slideshow-wrapper {
             border-radius: 28px;
             overflow: hidden;
@@ -163,7 +163,6 @@
             padding: 0;
         }
 
-        /* ─── FLOATING WHATSAPP ─── */
         .float-wa {
             position: fixed;
             bottom: 24px;
@@ -223,7 +222,7 @@
 </head>
 <body>
 
-<!-- ═══ NAVBAR LOADER ═══ -->
+<!-- NAVBAR -->
 <div id="navbar-placeholder"></div>
 <script>
     fetch('navbar.html')
@@ -253,15 +252,13 @@
         });
 </script>
 
-<!-- ═══ SINGLE MAIN CONTAINER ═══ -->
+<!-- MAIN CONTENT -->
 <div class="main-container">
 
-    <!-- ✅ HERO IMAGE (special.webp) – replaces old text block -->
-    <div class="hero-image-wrapper">
+    <div class="hero-image-wrapper" id="heroClickArea">
         <img src="special.webp" alt="Power Build 350ml – The Technology That Automatically Saves You Up to 10% or More on Fuel Every Day" loading="lazy">
     </div>
 
-    <!-- SLIDESHOW -->
     <div class="slideshow-wrapper">
         <div id="slideshow-container"></div>
     </div>
@@ -274,7 +271,7 @@
 
 </div>
 
-<!-- ═══ FOOTER LOADER ═══ -->
+<!-- FOOTER -->
 <script>
     fetch('footer.html')
         .then(response => {
@@ -291,14 +288,237 @@
         });
 </script>
 
-<!-- ═══ FLOATING WHATSAPP ═══ -->
+<!-- FLOATING WHATSAPP -->
 <a href="https://wa.me/+60143929913" class="float-wa" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp">
     <i class="fab fa-whatsapp"></i>
     <span class="wa-tooltip">Chat with us</span>
 </a>
 
-<!-- ═══ SLIDESHOW SCRIPT ═══ -->
+<!-- VIDEO OVERLAY + FLOWER BLOOM -->
+<div id="videoOverlay" style="
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(10px);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    animation: overlayFadeIn 0.5s ease;
+">
+    <canvas id="flowerCanvas" style="
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+    "></canvas>
+
+    <div style="
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        width: 90%;
+        border-radius: 28px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        background: #000;
+        transform: scale(0.95);
+        animation: videoPopIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    ">
+        <video id="specialVideo" src="special.mp4" muted autoplay playsinline loop style="
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 28px;
+        "></video>
+        <button onclick="closeOverlay()" style="
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            backdrop-filter: blur(4px);
+            transition: 0.3s;
+            z-index: 10;
+        ">✕</button>
+    </div>
+</div>
+
+<style>
+    @keyframes overlayFadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+    @keyframes videoPopIn {
+        0% { transform: scale(0.8); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+</style>
+
 <script>
+    // ─── FLOWER BLOOM ───
+    (function() {
+        const canvas = document.getElementById('flowerCanvas');
+        const ctx = canvas.getContext('2d');
+        let petals = [];
+        let animationId = null;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+
+        function createPetal(x, y) {
+            const angle = Math.random() * Math.PI * 2;
+            const speed = 2 + Math.random() * 4;
+            const size = 20 + Math.random() * 35;
+            const color = `hsl(${Math.floor(Math.random() * 60 + 330)}, 90%, 60%)`;
+            return {
+                x, y,
+                vx: Math.cos(angle) * speed,
+                vy: Math.sin(angle) * speed - 1.5,
+                size,
+                rotation: Math.random() * Math.PI * 2,
+                rotSpeed: (Math.random() - 0.5) * 0.1,
+                life: 1,
+                color,
+                decay: 0.006 + Math.random() * 0.01,
+                gravity: 0.05,
+                drag: 0.99
+            };
+        }
+
+        function drawPetal(p) {
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rotation);
+            ctx.globalAlpha = p.life * 0.9;
+            ctx.fillStyle = p.color;
+            ctx.shadowColor = p.color;
+            ctx.shadowBlur = 20;
+            ctx.beginPath();
+            ctx.ellipse(0, 0, p.size * 0.4, p.size * 0.7, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+        }
+
+        function updatePetals() {
+            for (let i = petals.length - 1; i >= 0; i--) {
+                const p = petals[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += p.gravity;
+                p.vx *= p.drag;
+                p.vy *= p.drag;
+                p.rotation += p.rotSpeed;
+                p.life -= p.decay;
+                if (p.life <= 0) petals.splice(i, 1);
+            }
+        }
+
+        function drawLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (const p of petals) drawPetal(p);
+            updatePetals();
+            if (petals.length > 0) {
+                animationId = requestAnimationFrame(drawLoop);
+            } else {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                animationId = null;
+            }
+        }
+
+        function burstFlowers(x, y) {
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+            }
+            petals = [];
+            const count = 60 + Math.floor(Math.random() * 60);
+            for (let i = 0; i < count; i++) {
+                petals.push(createPetal(x, y));
+            }
+            drawLoop();
+        }
+
+        window.burstFlowers = burstFlowers;
+        window.resizeCanvas = resizeCanvas;
+    })();
+
+    // ─── OPEN / CLOSE OVERLAY ───
+    function openOverlay(e) {
+        const overlay = document.getElementById('videoOverlay');
+        overlay.style.display = 'flex';
+
+        let x, y;
+        if (e) {
+            x = e.clientX;
+            y = e.clientY;
+        } else {
+            x = window.innerWidth / 2;
+            y = window.innerHeight / 2;
+        }
+
+        setTimeout(() => {
+            window.burstFlowers(x, y);
+        }, 100);
+
+        const video = document.getElementById('specialVideo');
+        video.currentTime = 0;
+        video.play().then(() => {
+            video.muted = false;   // ✅ UNMUTE → AUDIO PLAYS
+        }).catch(() => {});
+    }
+
+    function closeOverlay() {
+        const overlay = document.getElementById('videoOverlay');
+        overlay.style.display = 'none';
+        const video = document.getElementById('specialVideo');
+        video.pause();
+        if (window.animationId) {
+            cancelAnimationFrame(window.animationId);
+            window.animationId = null;
+        }
+        const canvas = document.getElementById('flowerCanvas');
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    // ─── CLICK ON HERO ───
+    document.addEventListener('DOMContentLoaded', function() {
+        const heroWrapper = document.getElementById('heroClickArea');
+        if (heroWrapper) {
+            heroWrapper.addEventListener('click', function(e) {
+                openOverlay(e);
+            });
+        }
+
+        const overlay = document.getElementById('videoOverlay');
+        overlay.addEventListener('click', function(e) {
+            if (e.target === this || e.target === document.getElementById('flowerCanvas')) {
+                closeOverlay();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeOverlay();
+        });
+    });
+
+    window.openOverlay = openOverlay;
+    window.closeOverlay = closeOverlay;
+
+    // ─── SLIDESHOW ───
     (function() {
         var container = document.getElementById('slideshow-container');
         if (!container) return;
